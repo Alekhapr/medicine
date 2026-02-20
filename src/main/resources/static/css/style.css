@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f4f6fb; color: #1d2433; }
+.container { width: min(1200px, 95%); margin: 24px auto; }
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+h1 { margin: 0; font-size: 1.6rem; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.card { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.card p { font-size: 1.4rem; margin: 5px 0 0; font-weight: bold; }
+.card.danger { border-left: 5px solid #cc2936; }
+.card.warning { border-left: 5px solid #ff8a00; }
+.panel { margin-top: 18px; background: #fff; border-radius: 10px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.btn { background: #1b6ef3; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; text-decoration: none; cursor: pointer; }
+.btn.secondary { background: #4b5563; }
+.btn.warning { background: #ff8a00; }
+.btn.danger { background: #cc2936; }
+.btn.ghost { background: #e8eefc; color: #123; }
+.btn.tiny { padding: 4px 8px; font-size: .8rem; }
+.actions-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.toolbar, .filter-buttons { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.toolbar input { padding: 8px; border: 1px solid #d4d8e0; border-radius: 6px; min-width: 240px; }
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; }
+th, td { padding: 10px 8px; border-bottom: 1px solid #edf0f5; text-align: left; }
+th { background: #f8fafe; font-size: .9rem; }
+.row-expired { background: #ffe4e6; }
+.row-low { background: #fff2e0; }
+.text-red { color: #cc2936; }
+.text-orange { color: #ff8a00; }
+.grid-form { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #fff; padding: 16px; border-radius: 10px; }
+.grid-form label { display: flex; flex-direction: column; gap: 6px; font-size: .92rem; }
+.grid-form input, .grid-form textarea { padding: 8px; border: 1px solid #d4d8e0; border-radius: 6px; }
+.grid-form .full { grid-column: 1 / -1; }
+.pagination { margin-top: 12px; display: flex; gap: 10px; align-items: center; }
+.alert { margin: 8px 0; padding: 8px 10px; border-radius: 6px; }
+.alert.success { background: #dff6e4; color: #1f7a35; }
+.alert.error { background: #ffe2e6; color: #a32836; }

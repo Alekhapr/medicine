@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Inventory</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header class="topbar">
+        <h1>Medicine Inventory</h1>
+        <div class="actions-row">
+            <a class="btn secondary" th:href="@{/dashboard}">Dashboard</a>
+            <a class="btn" th:href="@{/medicines/new}">+ Add Medicine</a>
+        </div>
+    </header>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+    <div id="messageBox"></div>
+
+    <form method="get" th:action="@{/medicines}" class="toolbar">
+        <input type="text" name="search" th:value="${search}" placeholder="Search by medicine name">
+        <button class="btn" type="submit">Search</button>
+    </form>
+
+    <div class="filter-buttons">
+        <button class="btn ghost" onclick="filterMedicines('all')">All</button>
+        <button class="btn ghost" onclick="filterMedicines('expired')">Expired</button>
+        <button class="btn ghost" onclick="filterMedicines('expiring-soon')">Expiring in 30 days</button>
+        <button class="btn ghost" onclick="filterMedicines('low-stock')">Low stock</button>
+        <button class="btn ghost" onclick="filterMedicines('out-of-stock')">Out of stock</button>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th><th>Company</th><th>Type</th><th>Price</th><th>Stock</th><th>Expiry</th><th>Class</th><th>Shelf</th><th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="medicineTableBody">
+        <tr th:each="m : ${medicines}" th:classappend="${m.expired} ? 'row-expired' : (${m.lowStock} ? 'row-low' : '')">
+            <td th:text="${m.name}"></td>
+            <td th:text="${m.companyName}"></td>
+            <td th:text="${m.type}"></td>
+            <td th:text="${m.price}"></td>
+            <td th:text="${m.stockQuantity}"></td>
+            <td th:text="${m.expiryDate}"></td>
+            <td th:text="${m.medicineClass}"></td>
+            <td th:text="${m.shelfLocation}"></td>
+            <td class="actions-row">
+                <a class="btn tiny" th:href="@{'/medicines/' + ${m.id} + '/edit'}">Edit</a>
+                <button class="btn tiny warning" th:attr="data-id=${m.id}" onclick="updateStock(this.dataset.id)">Update Stock</button>
+                <button class="btn tiny danger" th:attr="data-id=${m.id}" onclick="deleteMedicine(this.dataset.id)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <a class="btn ghost" th:if="${!medicinePage.first}" th:href="@{/medicines(page=${medicinePage.number - 1}, search=${search})}">Previous</a>
+        <span th:text="${medicinePage.number + 1 + ' / ' + medicinePage.totalPages}"></span>
+        <a class="btn ghost" th:if="${!medicinePage.last}" th:href="@{/medicines(page=${medicinePage.number + 1}, search=${search})}">Next</a>
+    </div>
+</div>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>
