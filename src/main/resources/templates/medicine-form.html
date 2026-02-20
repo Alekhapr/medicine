@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${medicine.id == null ? 'Add Medicine' : 'Edit Medicine'}"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header class="topbar">
+        <h1 th:text="${medicine.id == null ? 'Add New Medicine' : 'Edit Medicine'}"></h1>
+        <a class="btn secondary" th:href="@{/medicines}">Back</a>
+    </header>
+
+    <form th:action="@{/medicines}" th:object="${medicine}" method="post" class="grid-form">
+        <input type="hidden" th:field="*{id}">
+
+        <label>Name<input type="text" th:field="*{name}" required></label>
+        <label>Company Name<input type="text" th:field="*{companyName}" required></label>
+        <label>Composition<input type="text" th:field="*{composition}" required></label>
+        <label>Type<input type="text" th:field="*{type}" placeholder="Tablet/Syrup/Capsule" required></label>
+        <label>Price<input type="number" th:field="*{price}" step="0.01" min="0.01" required></label>
+        <label>Stock Quantity<input type="number" th:field="*{stockQuantity}" min="0" required></label>
+        <label>Expiry Date<input type="date" th:field="*{expiryDate}" required></label>
+        <label>Medicine Class<input type="text" th:field="*{medicineClass}" required></label>
+        <label>Shelf Location<input type="text" th:field="*{shelfLocation}" required></label>
+        <label>Low Stock Threshold<input type="number" th:field="*{lowStockThreshold}" min="1" required></label>
+        <label class="full">Description<textarea th:field="*{description}"></textarea></label>
+
+        <button type="submit" class="btn">Save Medicine</button>
+    </form>
+</div>
+</body>
+</html>

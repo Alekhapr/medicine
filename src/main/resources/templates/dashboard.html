@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Inventory Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header class="topbar">
+        <h1>Medicine Store Inventory Dashboard</h1>
+        <a class="btn" th:href="@{/medicines}">Manage Medicines</a>
+    </header>
+
+    <section class="cards">
+        <div class="card"><h3>Total Medicines</h3><p th:text="${stats.totalMedicines}"></p></div>
+        <div class="card"><h3>Total Stock</h3><p th:text="${stats.totalStock}"></p></div>
+        <div class="card danger"><h3>Expired Count</h3><p th:text="${stats.expiredCount}"></p></div>
+        <div class="card warning"><h3>Low Stock Count</h3><p th:text="${stats.lowStockCount}"></p></div>
+    </section>
+
+    <section class="panel">
+        <h2>Expired Medicines</h2>
+        <ul>
+            <li th:if="${#lists.isEmpty(expiredMedicines)}">No expired medicines found.</li>
+            <li th:each="m : ${expiredMedicines}" class="text-red" th:text="${m.name + ' | Expired on: ' + m.expiryDate}"></li>
+        </ul>
+    </section>
+
+    <section class="panel">
+        <h2>Low Stock Medicines</h2>
+        <ul>
+            <li th:if="${#lists.isEmpty(lowStockMedicines)}">No low stock medicines.</li>
+            <li th:each="m : ${lowStockMedicines}" class="text-orange" th:text="${m.name + ' | Stock: ' + m.stockQuantity}"></li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>
